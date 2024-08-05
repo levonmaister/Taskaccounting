@@ -1,49 +1,39 @@
 
-import {useTimer} from './hooks/useTimer';
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link
+} from 'react-router-dom'
 
-import {useState} from  'react';
+import Tasks from "./Components/DisplayableComponents/Components/Tasks";
+import Goals from "./Components/DisplayableComponents/Components/Goals";
+import Goal from "./Components/DisplayableComponents/Subcomponents/Goal";
+
+
 
 function App() {
-  const Timer = useTimer();
-  const Time = Timer.GetDisplayTime();
 
-  const [name, setName] = useState('levon');
-  const [text, setText] = useState(''); 
+  const padding = {
+    padding: 5
+  }
 
+    return(
+      <Router>
+      <div>
 
+      <div>
+        <Link style={padding} to="/goals">Goals</Link>
+        <Link style={padding} to="/tasks">Tasks</Link>
+      </div>
 
-const handlePause = () => {
-  console.log('PAUSE INVOKED');
-  Timer.Pause();
-}
+      <Routes>
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/goals" element={<Goals />} />
+        <Route path="/goals/:name" element={<Goal />}/>
+      </Routes>
 
-const handleResume = () => {
-  console.log('RESUME INVOKED');
-  Timer.Resume();
-}
-
-const handleRefresh = () => {
-    setName(text);
-    setText('');
-    console.log(name);
-}
-
-  return (
-    <div>
-    {Time}
-
-    <button type='submit' onClick={handlePause}>Pause</button>
-    <button type='submit' onClick={handleResume}>Resume</button>
- 
-
-<form onSubmit={(handleRefresh)}>
-  <input type='text' onChange={(event)=> setText(event.target.value) } />
-  <button type='submit'>Submit</button>
-</form>
-
-    <p>{name}</p>
- </div>
-  )
+      </div>
+      </Router>
+    )
 
 
 }
