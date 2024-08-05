@@ -10,3 +10,7 @@
 
 1.8(4h): Trying to create a pomodoro like countdown timer that is displayed on the screen
             but encountering problems when trying to render other components. Researching useRef & callback functions 
+
+3.8 (1h): Planning Redux architechture for Goals & Tasks
+
+5.8 (5h): Planning & Building Redux architechture in typescript and setting up frontend routes for forms & display of goals & tasks.
