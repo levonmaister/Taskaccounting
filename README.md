@@ -14,3 +14,5 @@
 3.8 (1h): Planning Redux architechture for Goals & Tasks
 
 5.8 (5h): Planning & Building Redux architechture in typescript and setting up frontend routes for forms & display of goals & tasks.
+
+6.8 (5h): Tried creating a backend, ran into some problems when trying to use Mongoose & GraphQL together with Typescript. Now            learning TypeGraphQL and Typegoose
