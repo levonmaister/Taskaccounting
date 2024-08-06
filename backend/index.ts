@@ -85,9 +85,8 @@ const resolvers = {
         allGoals: async () => Goal.collection.countDocuments(),
     },
     Mutation: {
-      addGoal: async ({args}: {args: Object}) => {
+      addGoal: async ({args}: {args: GoalArgsInput}) => {
         console.log(args);
-        return "fuck me";
       }
     }
   }
