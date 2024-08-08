@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "es2021",
     "outDir": "./build/",
     "module": "commonjs",
     "strict": true,
@@ -8,6 +8,10 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["ES2022", "ESNext.AsyncIterable"],
+    "strictPropertyInitialization": false,
   }
 }

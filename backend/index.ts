@@ -1,99 +1,22 @@
-// import { GoalArgs } from "./types"
+import "reflect-metadata";
+import { buildSchema} from "type-graphql";
+import {resolvers} from "./resolver/resolvers";
+import { connectToMongo } from "./utils/mongo";
 
-const { ApolloServer } = require('@apollo/server')
-const { startStandaloneServer } = require('@apollo/server/standalone')
+const { ApolloServer } = require('@apollo/server');
+const { startStandaloneServer } = require('@apollo/server/standalone');
 
-
-//const { GraphQLError, isUnionType } = require('graphql')
-
-//const { v1: uuid } = require('uuid')
-const mongoosemain = require('mongoose')
-mongoosemain.set('strictQuery', false)
-
-//const User = require('./models/userSchema');
-const Goal = require('./models/goalSchema');
-//const Doabletask = require('./models/doabletaskSchema');
-//const DoneTask = require('./models/taskSchema');
-
-require('dotenv').config()
-//const jwt = require('jsonwebtoken')
+require('dotenv').config();
 
 
-const MONGODB_URI = process.env.MONGODB_URI
-
-mongoosemain.connect(MONGODB_URI)
-  .then(() => {
-    console.log('connected to MongoDB')
-  })
-  
-
-
-const typeDefs = `
-  type User {
-    username: String!
-    password: String!
-    id: ID!
-    goal: Goal
-  }
-
-  type Token {
-    value: String!
-  }
-
-  type DoneTask {
-    name: String!
-    time: Int
-    date: String
-    tags: [String]
-    goal: Goal
-  }
-
-  type DoableTask {
-    name: String
-    tags: [String]
-    goal: Goal
-  }
-
-  type Goal {
-    name: String!
-    description: String
-    tags: [String]
-    tasks: [DoneTask]
-    user: User
-  }
-
-  type Query {
-    allGoals: Int
-  } 
-
-  type Mutation{
-
-    addGoal(
-      name: String!
-      description: String
-      tags: [String]
-      userId: String!
-    ) : String
-  
-  }
-`
+async function bootstrap() {
 
 
 
-const resolvers = {
-    Query: {
-        allGoals: async () => Goal.collection.countDocuments(),
-    },
-    Mutation: {
-      addGoal: async ({args}: {args: GoalArgsInput}) => {
-        console.log(args);
-      }
-    }
-  }
-  
+  const schema = await buildSchema({resolvers});
+
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema
   })
   
   startStandaloneServer(server, {
@@ -101,3 +24,21 @@ const resolvers = {
   }).then(() => {
     console.log(`Server ready`)
   })
+
+
+  connectToMongo();
+
+}
+
+
+
+
+bootstrap();
+
+  
+
+
+
+
+  
+ 
