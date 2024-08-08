@@ -19,4 +19,4 @@
 
 7.8 (4h): Researching and trying to implement typegoose & typegraphql
 
-8.8 (2h): Programming Backend with Typegoose and type-graphql
+8.8 (3h): Programming Backend with Typegoose and type-graphql
