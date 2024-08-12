@@ -20,3 +20,5 @@
 7.8 (4h): Researching and trying to implement typegoose & typegraphql
 
 8.8 (3h): Programming Backend with Typegoose and type-graphql
+
+12.8 (2h): Integrating some basic Backend features with Frontend
