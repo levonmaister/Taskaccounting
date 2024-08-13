@@ -15,11 +15,11 @@ const GoalList = () => {
 
     const goals = useSelector((state: RootState ) => state.goals);
     
-    const GoalsQuery =  useQuery(ALL_GOALS);
+  //  const GoalsQuery =  useQuery(ALL_GOALS);
 
 
       
-    if(GoalsQuery.loading){ 
+ /*   if(GoalsQuery.loading){ 
         console.log('LOADING')
         return <div>Loading</div>
     }
@@ -35,8 +35,12 @@ const GoalList = () => {
     dispatch(loadGoals(GoalList));
 
     
+    */
+
+
     console.log('goals:' , goals)
 
+    
     return(
         <div>
            {goals.map(goal=><li key={goal.name}><Link to={`/goals/${goal._id}`}>{goal.name}: {goal.description}</Link></li>)}
