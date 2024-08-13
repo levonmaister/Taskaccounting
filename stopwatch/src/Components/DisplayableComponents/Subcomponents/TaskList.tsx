@@ -8,7 +8,7 @@ const TaskList = () => {
 
     const tasks = useSelector((state: RootState ) => state.tasks);
 
-
+    console.log('TASKLIST: ', tasks)
     return(
         <div>
            {tasks.map(task=><li>{task.date}    {task.name}: {task.time}h</li>)}

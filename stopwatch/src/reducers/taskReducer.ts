@@ -1,15 +1,15 @@
 
 import { PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {TaskEntry} from './reducerTypes'
+import {Task} from './reducerTypes'
 import {Dispatch} from "redux"
 
-const initialState: TaskEntry[] = [] 
+const initialState: Task[] = [] 
 
 const taskSlice = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
-        appendTasks(state, action: PayloadAction<TaskEntry>){
+        appendTasks(state, action: PayloadAction<Task>){
             state.push(action.payload)
         }
 
@@ -17,7 +17,7 @@ const taskSlice = createSlice({
 })
 
 
-export const createTask = (newTask: TaskEntry) => {
+export const createTask = (newTask: Task) => {
     return (dispatch: Dispatch) => {
     dispatch( appendTasks(newTask) )
   }

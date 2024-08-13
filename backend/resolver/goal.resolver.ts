@@ -15,12 +15,14 @@ export default class GoalResolver{
     
     @Query(() =>[Goal])
     getGoals(){
+        console.log('GET GOALS')
         return this.goalService.getGoals();
     }
 
 
     @Mutation(()=>Goal)
     createGoal(@Arg('input') input: CreateGoalInput){
+        console.log('CREATING GOAL: ', input)
         return this.goalService.createGoal(input)
     }
 

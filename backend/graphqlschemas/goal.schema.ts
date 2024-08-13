@@ -2,7 +2,6 @@ import { Field, InputType, ObjectType } from "type-graphql";
 import { Task } from "./task.schema";
 
 
-
 @ObjectType()
 export class Goal {
     @Field()
@@ -15,10 +14,10 @@ export class Goal {
         description: string;
 
     @Field(() => [String], {nullable: true})
-        Tags?: (String | null )[];
+        Tags: (String | null )[];
 
     @Field(()=> [Task],{nullable: true})
-        tasks?: Task[];
+        tasks: Task[];
 }
 
 
@@ -40,6 +39,7 @@ export class Goal {
 
         @Field()
         Goal: string;
+
     }
 
 
@@ -54,4 +54,5 @@ export class CreateGoalInput{
 
     @Field(() => [String], {nullable: true})
         Tags?: (String | null )[];
+
 }

@@ -55,7 +55,7 @@ __decorate([
 ], CreateTaskInput.prototype, "Tags", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], CreateTaskInput.prototype, "date", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),

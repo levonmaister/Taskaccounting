@@ -16,7 +16,7 @@ return NewGoal
 }
 
  getGoals = async() => {
-    return GoalModel.find({}).populate("tasks");
+    return GoalModel.find({}).populate('tasks');
 }
 
 

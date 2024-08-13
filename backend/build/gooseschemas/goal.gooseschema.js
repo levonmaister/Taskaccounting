@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GoalModel = exports.Goal = void 0;
 const typegoose_1 = require("@typegoose/typegoose");
+const task_gooseschema_1 = require("./task.gooseschema");
 class Goal {
 }
 exports.Goal = Goal;
@@ -27,7 +28,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Goal.prototype, "Tags", void 0);
 __decorate([
-    (0, typegoose_1.prop)(),
+    (0, typegoose_1.prop)({ ref: () => task_gooseschema_1.Task }),
     __metadata("design:type", Array)
 ], Goal.prototype, "tasks", void 0);
 exports.GoalModel = (0, typegoose_1.getModelForClass)(Goal);

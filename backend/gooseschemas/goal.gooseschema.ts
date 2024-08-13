@@ -14,7 +14,7 @@ export class Goal {
     @prop()
     public Tags: [];
 
-    @prop()
+    @prop({ref: ()=> Task})
     public tasks: Ref<Task>[];
 }
 

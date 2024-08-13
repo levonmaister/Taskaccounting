@@ -25,6 +25,7 @@ let GoalResolver = class GoalResolver {
         this.goalService = new goal_service_1.default();
     }
     getGoals() {
+        console.log('GET GOALS');
         return this.goalService.getGoals();
     }
     createGoal(input) {

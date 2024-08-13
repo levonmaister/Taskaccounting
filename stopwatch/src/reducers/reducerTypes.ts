@@ -9,27 +9,30 @@ export interface User{
 
 
 export interface Goal{
-    id: number,
+    _id: string,
     name: string,
-    Tasks: Task[],
+    tasks: Task[],
     Tags: string[],
     description: string,
-    userId: string,
 }
+
+
 export interface GoalEntry{
     name: string,
-    Tasks: TaskEntry[],
     Tags: string[],
     description: string
 }
 
+
+
+
 export interface Task {
     id: number,
-    goalId: number,
+    Goal: string,
     name: string,
     Tags: string[]
     time: number,
-    date: Date,
+    date: string,
 }
 
 export interface TaskEntry {
@@ -37,11 +40,12 @@ export interface TaskEntry {
     Tags: string[],
     time: number,
     date: string,
+    Goal: string,
 }
 
 export interface Tasktogoal{
     Goalname: string,
-    NewTask: TaskEntry;
+    NewTask: Task;
 }
 
 

@@ -6,13 +6,15 @@ class TaskService {
 
     async createTask(input: any)
 {
-    console.log(input)
+    console.log(input);
+
     const NewTask = await TaskModel.create(input);
-    console.log('TASKID: ', NewTask.id)
+    console.log('TASKID: ', NewTask.id);
     const DesignatedGoal = await GoalModel.findById(input.Goal);
 
     if(DesignatedGoal){
-    DesignatedGoal.tasks = DesignatedGoal.tasks.concat(NewTask._id)
+    DesignatedGoal.tasks = DesignatedGoal.tasks.concat(NewTask._id);
+    NewTask.Goal = DesignatedGoal.id;
     DesignatedGoal.save();
     }
 

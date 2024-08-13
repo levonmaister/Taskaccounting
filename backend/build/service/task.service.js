@@ -10,8 +10,14 @@ class TaskService {
     }
     async createTask(input) {
         console.log(input);
-        const NewTask = task_gooseschema_1.TaskModel.create(input);
-        const DesignatedGoal = goal_gooseschema_1.GoalModel.findById(input.Goal);
+        const NewTask = await task_gooseschema_1.TaskModel.create(input);
+        console.log('TASKID: ', NewTask.id);
+        const DesignatedGoal = await goal_gooseschema_1.GoalModel.findById(input.Goal);
+        if (DesignatedGoal) {
+            DesignatedGoal.tasks = DesignatedGoal.tasks.concat(NewTask._id);
+            NewTask.Goal = DesignatedGoal.id;
+            DesignatedGoal.save();
+        }
         console.log('DESIGNATED GOAL: ', DesignatedGoal);
         console.log('CREATED TASK: ', NewTask);
         // CALL USER MODEL

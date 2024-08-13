@@ -1,11 +1,13 @@
-import {createTask} from '../../reducers/taskReducer';
-import{addTask} from '../../reducers/goalReducer'
+import {appendTasks} from '../../reducers/taskReducer';
+import{ appendTask} from '../../reducers/goalReducer'
 import {useState} from 'react'
-import { TaskEntry } from '../../reducers/reducerTypes';
+import { Task, TaskEntry } from '../../reducers/reducerTypes';
 import {useSelector} from 'react-redux'
 //import {State} from './reducers/store';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../reducers/store';
+import { ALL_GOALS, ALL_TASKS, CREATE_TASK } from '../../services/queries';
+import { useMutation } from '@apollo/client';
 
 
 
@@ -18,9 +20,14 @@ const TaskForm = () => {
     const [time, setTime] = useState(0);
 
 
+    const [createTaskMutation] = useMutation(CREATE_TASK, {
+        refetchQueries: [  {query: ALL_TASKS}, {query: ALL_GOALS} ]
+       }); 
+
     const [goal, setGoal] = useState('');
 
     const dispatch = useDispatch<AppDispatch>();
+
     const goals = useSelector((state: RootState) => state.goals)
 
 
@@ -38,18 +45,31 @@ const creationHandler = async (event: React.SyntheticEvent) => {
             date: Date,
             Tags: tags,
             time: time,
+            Goal: goal,
         }
 
        
-        console.log('adding task to: ', goal)
-        dispatch(addTask(TaskObject, goal));
-        
-        dispatch(createTask(TaskObject));
-        
+        console.log('adding task to: ', goal);
+
+        const newTaskPromise = await createTaskMutation({ variables: { input: TaskObject } });
+
+        console.log('MUTATION RETURNED: ', newTaskPromise);
+        console.log('DATA RETURNED: ', newTaskPromise.data.createTask);
+      
+      let newTask : Task;
+      
+       if(newTaskPromise.data){
+        newTask = newTaskPromise.data.createTask;
+        dispatch(appendTasks(newTask));
+        dispatch(appendTask(newTask));
         setName('');
-        setDate('');
         setTags([]);
+        setTag('');
+        setDate('');
+        setGoal('');
         setTime(0)
+      }
+      
 
 
 }
@@ -61,14 +81,14 @@ const creationHandler = async (event: React.SyntheticEvent) => {
            
         <div>
             <form onSubmit={(creationHandler)}>
-            date<input value={Date} onChange={({target}) => setDate(target.value)}/>
+            date<input value={Date} type="date"  name="date" required  onChange={(event) => setDate(event.target.value)} />
 
             name<input value={name} onChange={({target}) => setName(target.value)}/>
 
           
             <select value={goal} onChange= {e=> setGoal(e.target.value)}>
                 <option key={"default"} value="default">No Goal Selected</option>
-                {goals.map(goal=> (<option key={goal.name} value={goal.name}>{goal.name}</option>))}
+                {goals.map(goal=> (<option key={goal._id} value={goal._id}>{goal.name}</option>))}
             </select>
 
 time<input value={time} onChange={({target}) => setTime(Number(target.value))}/>

@@ -1,22 +1,28 @@
 import {createGoal} from '../../reducers/goalReducer';
 import {useState} from 'react'
-import { GoalEntry,TaskEntry } from '../../reducers/reducerTypes';
-import {useSelector} from 'react-redux'
+import { Goal, GoalEntry } from '../../reducers/reducerTypes';
+
 //import {State} from './reducers/store';
 import { useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '../../reducers/store';
+import { AppDispatch } from '../../reducers/store';
+import { useMutation } from '@apollo/client';
+import { ALL_GOALS, CREATE_GOAL } from '../../services/queries';
 
 
 const GoalForm = () => {
 
-    const [name, setName] = useState<string>('');
+     const [name, setName] = useState<string>('');
      const [description, setDescription] = useState<string>('');
      const [tags,setTags] = useState<string[]>([]);
      const [tag, setTag] = useState<string>('');
+    
 
      const dispatch = useDispatch<AppDispatch>();
-     const goals = useSelector((state: RootState ) => state.goals);
+    
 
+     const [createGoalMutation] = useMutation(CREATE_GOAL, {
+      refetchQueries: [  {query: ALL_GOALS} ]
+     }); 
 
 
 const addTag = () => {
@@ -28,27 +34,37 @@ const addTag = () => {
 const handleGoalCreation = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
-    
-    
-
-  const TaskList: TaskEntry[] = []
 
   const GoalObject: GoalEntry = {
       name: name,
       description: description,
       Tags: tags,
-      Tasks: TaskList
   }
 
+
   console.log('adding goal...', GoalObject)
-  console.log("store: ", goals)
 
-  dispatch(createGoal(GoalObject));
 
+ const newGoalPromise = await createGoalMutation({ variables: { input: GoalObject } });
+
+
+  console.log('MUTATION RETURNED: ', newGoalPromise)
+  console.log('DATA RETURNED: ', newGoalPromise.data)
+
+let newGoal : Goal
+
+ if(newGoalPromise.data){
+  newGoal = newGoalPromise.data
+  dispatch(createGoal(newGoal));
   setName('')
   setTags([]);
   setTag('')
   setDescription('')
+}
+
+
+
+
 
 }
 

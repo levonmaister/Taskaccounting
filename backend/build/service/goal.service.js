@@ -4,7 +4,7 @@ const goal_gooseschema_1 = require("../gooseschemas/goal.gooseschema");
 class GoalService {
     constructor() {
         this.getGoals = async () => {
-            return goal_gooseschema_1.GoalModel.find({});
+            return goal_gooseschema_1.GoalModel.find({}).populate('tasks');
         };
     }
     async createGoal(input) {

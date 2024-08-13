@@ -6,12 +6,17 @@ import {
 
 import Tasks from "./Components/DisplayableComponents/Components/Tasks";
 import Goals from "./Components/DisplayableComponents/Components/Goals";
-import Goal from "./Components/DisplayableComponents/Subcomponents/Goal";
+import GoalComponent from "./Components/DisplayableComponents/Subcomponents/Goal";
 
 
 
 function App() {
 
+
+  
+  
+
+  
   const padding = {
     padding: 5
   }
@@ -28,7 +33,7 @@ function App() {
       <Routes>
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/goals" element={<Goals />} />
-        <Route path="/goals/:name" element={<Goal />}/>
+        <Route path="/goals/:id" element={<GoalComponent />}/>
       </Routes>
 
       </div>
