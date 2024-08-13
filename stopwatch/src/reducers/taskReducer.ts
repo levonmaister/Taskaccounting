@@ -1,7 +1,7 @@
 
 import { PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {Task} from './reducerTypes'
-import {Dispatch} from "redux"
+
 
 const initialState: Task[] = [] 
 
@@ -21,11 +21,7 @@ const taskSlice = createSlice({
 })
 
 
-export const createTask = (newTask: Task) => {
-    return (dispatch: Dispatch) => {
-    dispatch( appendTasks(newTask) )
-  }
-}
+
 
 
 export const {appendTasks, loadTasks} = taskSlice.actions;

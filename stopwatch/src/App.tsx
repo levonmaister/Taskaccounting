@@ -14,6 +14,7 @@ import { ALL_GOALS, ALL_TASKS } from './services/queries';
 import { useQuery } from '@apollo/client';
 import { loadTasks } from './reducers/taskReducer';
 import { loadGoals } from './reducers/goalReducer';
+import { formatDate } from './services/dateFormatting';
 
 
 
@@ -32,10 +33,24 @@ function App() {
       const TaskList: Task[] = TaskQuery.data.getTasks;
       const GoalList: Goal[] = GoalsQuery.data.getGoals;
 
+// FORMAT THE DATES IN TASKLIST
+      const formattedTaskList = TaskList.map(task => ({
+        ...task,
+        date: formatDate(task.date)
+      }));
+
+      const formattedGoalList = GoalList.map(goal => ({
+        ...goal,
+        tasks: goal.tasks.map(task => ({
+          ...task,
+          date: formatDate(task.date)
+        }))
+      }));
+
       console.log(TaskList , GoalList, ' LOADING USEEFFECT');
 
-      dispatch(loadGoals(GoalList));
-      dispatch(loadTasks(TaskList));
+      dispatch(loadGoals(formattedGoalList));
+      dispatch(loadTasks(formattedTaskList));
     }
 
   },[GoalsQuery, TaskQuery])
