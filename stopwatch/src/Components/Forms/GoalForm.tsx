@@ -1,4 +1,4 @@
-import {createGoal} from '../../reducers/goalReducer';
+import {appendGoal} from '../../reducers/goalReducer';
 import {useState} from 'react'
 import { Goal, GoalEntry } from '../../reducers/reducerTypes';
 
@@ -6,7 +6,7 @@ import { Goal, GoalEntry } from '../../reducers/reducerTypes';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../reducers/store';
 import { useMutation } from '@apollo/client';
-import { ALL_GOALS, CREATE_GOAL } from '../../services/queries';
+import { CREATE_GOAL } from '../../services/queries';
 
 
 const GoalForm = () => {
@@ -20,9 +20,7 @@ const GoalForm = () => {
      const dispatch = useDispatch<AppDispatch>();
     
 
-     const [createGoalMutation] = useMutation(CREATE_GOAL, {
-      refetchQueries: [  {query: ALL_GOALS} ]
-     }); 
+     const [createGoalMutation] = useMutation(CREATE_GOAL); 
 
 
 const addTag = () => {
@@ -48,14 +46,14 @@ const handleGoalCreation = async (event: React.SyntheticEvent) => {
  const newGoalPromise = await createGoalMutation({ variables: { input: GoalObject } });
 
 
-  console.log('MUTATION RETURNED: ', newGoalPromise)
-  console.log('DATA RETURNED: ', newGoalPromise.data)
+  console.log('MUTATION RETURNED: ', newGoalPromise);
+  console.log('DATA RETURNED: ', newGoalPromise.data.createGoal);
 
 let newGoal : Goal
 
  if(newGoalPromise.data){
-  newGoal = newGoalPromise.data
-  dispatch(createGoal(newGoal));
+  newGoal = newGoalPromise.data.createGoal;
+  dispatch(appendGoal(newGoal));
   setName('')
   setTags([]);
   setTag('')

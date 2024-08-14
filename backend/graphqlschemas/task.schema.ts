@@ -19,7 +19,7 @@ export class Task {
         Tags?: (string | null )[]
 
     @Field()
-    date: Date;
+    date: string;
 
     @Field()
     Goal: string;

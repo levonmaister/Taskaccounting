@@ -25,8 +25,11 @@ export default class TaskResolver{
     createTask(@Arg('input') input: CreateTaskInput){
         return this.taskService.createTask(input)
     }
-
     
-    
+    @Mutation(()=>Boolean)
+    deleteTask(@Arg('input') input: string){
+        this.taskService.deleteTask(input)
+        return true;
+    }
    
 }

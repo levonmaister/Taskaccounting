@@ -1,6 +1,11 @@
 import { gql } from '@apollo/client'
 
 
+export const DELETE_TASK = gql`
+mutation($input: String!){
+  deleteTask(input: $input)
+}
+`
 
 
 export const ALL_GOALS = gql`

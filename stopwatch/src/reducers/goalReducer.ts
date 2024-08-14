@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {Goal, Task,} from './reducerTypes'
+import {DeletionId, Goal, Task,} from './reducerTypes'
 import {Dispatch} from "redux"
 
 
@@ -19,6 +19,7 @@ const goalSlice = createSlice({
         , 
         appendGoal(state, action: PayloadAction<Goal>){
             state.push(action.payload);
+            return state;
         },
         appendTask(state, action: PayloadAction<Task>){
 
@@ -30,6 +31,20 @@ const goalSlice = createSlice({
         return goal
         });
          
+        },
+        deleteTask(state, action: PayloadAction<DeletionId>){
+
+          const { goalId, taskId } = action.payload;
+
+      // Modify the draft state directly
+      const goalcopy = state.find(goal => goal._id === goalId);
+      if (goalcopy) {
+        goalcopy.tasks = goalcopy.tasks.filter(task => task.id !== taskId);
+      }
+
+      state = state.map((goal) => {if(goal._id==goalcopy?._id){return goalcopy}
+      return goal
+    })
         }
 
     }
@@ -58,5 +73,5 @@ export const addTask = (newTask: Task) => {
 
 
   
-export const {appendGoal, appendTask, loadGoals} = goalSlice.actions
+export const {appendGoal, appendTask, loadGoals,deleteTask} = goalSlice.actions
 export default goalSlice.reducer;

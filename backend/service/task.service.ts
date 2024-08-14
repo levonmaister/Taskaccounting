@@ -30,6 +30,32 @@ return NewTask
 }
 
 
+ async deleteTask (input: string){
+
+// FINDING THE TASK & GOAL
+    const TasktoDelete = await TaskModel.findById(input);
+
+    const GoalId = TasktoDelete?.Goal;
+
+    console.log('Deleting task id: ', input)
+
+//DELETION OF TASK
+    if(TasktoDelete){
+       console.log('deleting: ', TasktoDelete);
+       await TasktoDelete.deleteOne();
+    };
+
+    const Goal = await GoalModel.findById(GoalId)
+    
+if(Goal){
+    //UPDATING GOALS TASKLIST
+    Goal.tasks = Goal?.tasks.filter(task  => String(task) !== input)
+    await Goal.save();
+}
+
+}
+
+
 
 } 
 

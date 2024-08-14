@@ -32,7 +32,7 @@ __decorate([
 ], Task.prototype, "Tags", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], Task.prototype, "date", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),

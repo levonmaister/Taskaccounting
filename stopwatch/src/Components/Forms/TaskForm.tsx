@@ -6,8 +6,9 @@ import {useSelector} from 'react-redux'
 //import {State} from './reducers/store';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../reducers/store';
-import { ALL_GOALS, ALL_TASKS, CREATE_TASK } from '../../services/queries';
+import {  CREATE_TASK } from '../../services/queries';
 import { useMutation } from '@apollo/client';
+import { formatDate } from '../../services/dateFormatting';
 
 
 
@@ -20,9 +21,7 @@ const TaskForm = () => {
     const [time, setTime] = useState(0);
 
 
-    const [createTaskMutation] = useMutation(CREATE_TASK, {
-        refetchQueries: [  {query: ALL_TASKS}, {query: ALL_GOALS} ]
-       }); 
+    const [createTaskMutation] = useMutation(CREATE_TASK); 
 
     const [goal, setGoal] = useState('');
 
@@ -49,7 +48,7 @@ const creationHandler = async (event: React.SyntheticEvent) => {
         }
 
        
-        console.log('adding task to: ', goal);
+        console.log('adding', TaskObject, 'to: ', goal);
 
         const newTaskPromise = await createTaskMutation({ variables: { input: TaskObject } });
 
@@ -81,7 +80,7 @@ const creationHandler = async (event: React.SyntheticEvent) => {
            
         <div>
             <form onSubmit={(creationHandler)}>
-            date<input value={Date} type="date"  name="date" required  onChange={(event) => setDate(event.target.value)} />
+            date<input value={Date} type="date"  name="date" required  onChange={(event) => setDate(formatDate(event.target.value))} />
 
             name<input value={name} onChange={({target}) => setName(target.value)}/>
 

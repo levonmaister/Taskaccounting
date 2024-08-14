@@ -14,7 +14,7 @@ export class Task {
         Tags?: []
 
     @prop()
-    date: Date;
+    date: string;
 
     @prop()
     public Goal: Ref<Goal>;
