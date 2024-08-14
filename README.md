@@ -24,3 +24,5 @@
 12.8 (2h): Integrating some basic Backend features with Frontend
 
 13.8 (4h): Integrating frontend redux store with backend graphql and displaying the data in a more formatted way
+
+14.8 (3h): Delete requests on backend for Tasks & Integrating it into the frontend 
