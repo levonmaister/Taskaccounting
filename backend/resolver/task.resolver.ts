@@ -31,5 +31,15 @@ export default class TaskResolver{
         this.taskService.deleteTask(input)
         return true;
     }
+
+    @Mutation(()=>Task)
+    changeTaskTime(@Arg('id') id: string, @Arg('time') time: number){
+       return this.taskService.changeTaskTime(id, time);
+    }
+
+    @Mutation(()=>Task)
+    changeTaskName(@Arg('id') id: string, @Arg('name') name: string){
+       return this.taskService.changeTaskName(id, name);
+    }
    
 }

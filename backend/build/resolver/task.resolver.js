@@ -34,6 +34,9 @@ let TaskResolver = class TaskResolver {
         this.taskService.deleteTask(input);
         return true;
     }
+    changeTaskTime(id, time) {
+        return this.taskService.changeTaskTime(id, time);
+    }
 };
 __decorate([
     (0, type_graphql_1.Query)(() => [task_schema_1.Task]),
@@ -55,6 +58,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], TaskResolver.prototype, "deleteTask", null);
+__decorate([
+    (0, type_graphql_1.Mutation)(() => task_schema_1.Task),
+    __param(0, (0, type_graphql_1.Arg)('id')),
+    __param(1, (0, type_graphql_1.Arg)('time')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Number]),
+    __metadata("design:returntype", void 0)
+], TaskResolver.prototype, "changeTaskTime", null);
 TaskResolver = __decorate([
     (0, type_graphql_1.Resolver)(),
     __metadata("design:paramtypes", [task_service_1.default])

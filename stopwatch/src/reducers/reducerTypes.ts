@@ -1,7 +1,7 @@
 
 
 export interface User{
-    id: number,
+    id: string,
     username: string,
     password: string,
     goals: Goal[],
@@ -27,7 +27,7 @@ export interface GoalEntry{
 
 
 export interface Task {
-    id: number,
+    id: string,
     Goal: string,
     name: string,
     Tags: string[]
@@ -53,3 +53,9 @@ export interface Action {
     type?: string,
     payload: GoalEntry,
   }
+
+
+export interface DeletionId {
+    goalId: string,
+    taskId: string,
+}

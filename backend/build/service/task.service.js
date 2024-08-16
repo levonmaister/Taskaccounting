@@ -7,6 +7,12 @@ class TaskService {
         this.getTasks = async () => {
             return task_gooseschema_1.TaskModel.find({});
         };
+        this.changeTaskTime = async (id, time) => {
+            const Task = task_gooseschema_1.TaskModel.findById(id);
+            Task.time = time;
+            const UpdatedTask = task_gooseschema_1.TaskModel.findByIdAndUpdate(id, Task, { new: true });
+            return UpdatedTask;
+        };
     }
     async createTask(input) {
         console.log(input);

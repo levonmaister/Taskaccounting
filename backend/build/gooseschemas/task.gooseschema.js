@@ -28,7 +28,7 @@ __decorate([
 ], Task.prototype, "Tags", void 0);
 __decorate([
     (0, typegoose_1.prop)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], Task.prototype, "date", void 0);
 __decorate([
     (0, typegoose_1.prop)(),

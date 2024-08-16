@@ -56,6 +56,39 @@ if(Goal){
 }
 
 
+changeTaskTime = async(id: string, time: number) => {
+
+
+    const Task = await TaskModel.findById(id);
+    console.log('UPDATING' , Task , "with time: " , time)
+    if(Task){
+    Task.time = time;
+            
+    const UpdatedTask = await TaskModel.findByIdAndUpdate(id,Task,{new:true});
+
+
+    return UpdatedTask;
+        }
+
+    return null;
+}
+
+changeTaskName = async(id: string, name: string) => {
+
+
+    const Task = await TaskModel.findById(id);
+    console.log('UPDATING' , Task , "with time: " , name)
+    if(Task){
+    Task.name = name;
+            
+    const UpdatedTask = await TaskModel.findByIdAndUpdate(id,Task,{new:true});
+
+
+    return UpdatedTask;
+        }
+
+    return null;
+}
 
 } 
 
