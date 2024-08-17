@@ -26,3 +26,5 @@
 13.8 (4h): Integrating frontend redux store with backend graphql and displaying the data in a more formatted way
 
 14.8 (3h): Delete requests on backend for Tasks & Integrating it into the frontend 
+
+16.8 (1h): PUT Requests for task attributes time & name
