@@ -28,3 +28,7 @@
 14.8 (3h): Delete requests on backend for Tasks & Integrating it into the frontend 
 
 16.8 (1h): PUT Requests for task attributes time & name
+
+19.8 
+      - (1h) Material React Table implemenations for Tasks
+      
