@@ -31,4 +31,7 @@
 
 19.8 
       - (1h) Material React Table implemenations for Tasks
+      - (1h) Planning core features for each page etc
+20.8
+      - (1h) Planning core features on pages, looking up table & chart implementations, and UI design
       
