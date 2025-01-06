@@ -15,9 +15,6 @@ export class Task {
     @Field()
         time: number;
 
-    @Field(() => [String], {nullable: true})
-        Tags?: (string | null )[]
-
     @Field()
     date: string;
 

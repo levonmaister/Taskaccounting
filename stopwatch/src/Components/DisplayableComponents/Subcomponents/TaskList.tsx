@@ -6,7 +6,7 @@ import {  DELETE_TASK } from '../../../services/queries';
 import { useMutation } from '@apollo/client';
 import { deleteTask } from '../../../reducers/goalReducer';
 import { deleteTaskT } from '../../../reducers/taskReducer';
-import TaskTable from './Tables/TaskTable';
+
 
 const TaskList = () => {
    
@@ -65,7 +65,7 @@ const TaskList = () => {
                     {tasks.map((task)=>{
                         return(
 
-                            <tr key={task.name}>
+                            <tr key={task.id}>
 
                                 <td>{task.date}</td>
                                 <td>{task.name}</td>
@@ -83,9 +83,7 @@ const TaskList = () => {
             </table>
 
 
-                        <div>
-                            <TaskTable />
-                        </div>
+                    
         </div>
 
        
